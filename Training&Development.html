@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Training & Development</title>
+  <!-- Include FontAwesome for the Home Icon -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+  <style>
+    /* Global Styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #84aec3;
+      padding: 30px;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      background-color: #c87ea4;
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+      text-align: center;
+      color: #333;
+      margin-bottom: 30px;
+    }
+
+    .section {
+      margin-bottom: 30px;
+      padding: 20px;
+      border-radius: 8px;
+    }
+
+    /* Employee Section Styles */
+    #employeesSection {
+      background-color: #eeeeec;
+    }
+
+    .employee-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .employee-item {
+      background-color: #6caf78;
+      padding: 15px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      width: 220px;
+      text-align: center;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .employee-item button {
+      margin-top: 10px;
+      padding: 8px;
+      width: 100%;
+      background-color: #007BFF;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .employee-item button:hover {
+      background-color: #0056b3;
+    }
+
+    /* Training Section Styles */
+    #trainingsSection {
+      background-color: #ffc4ff;
+    }
+
+    .training-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .training-item {
+      background-color: #a462e7;
+      padding: 15px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      width: 220px;
+      text-align: center;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .training-item button {
+      margin-top: 10px;
+      padding: 8px;
+      width: 100%;
+      background-color: #28a745;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .training-item button:hover {
+      background-color: #218838;
+    }
+
+    /* Progress Section Styles */
+    #employeeProgressSection {
+      background-color: #fce4ec;
+    }
+
+    #employeeProgress {
+      padding: 20px;
+      background-color: #ffffff;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    button {
+      display: block;
+      width: 100px;
+      margin: 20px auto;
+      padding: 10px;
+      background-color: #4CAF50;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+
+    /* Home Button Styles */
+    .home-btn {
+            position: fixed;
+            bottom: 20px; /* Position 20px from the bottom */
+            right: 20px; /* Position 20px from the right */
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999; /* Ensure it appears on top of other content */
+            text-align: center;
+        }
+
+        .home-btn i {
+            font-size: 20px;
+        }
+
+        .home-btn:hover {
+            background-color: #0056b3;
+        }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Training & Development Dashboard</h1>
+
+    <!-- Employee Section -->
+    <div class="section" id="employeesSection">
+      <h2>Employees</h2>
+      <div class="employee-list" id="employeeList"></div>
+    </div>
+
+    <!-- Training Programs Section -->
+    <div class="section" id="trainingsSection">
+      <h2>Available Training Programs</h2>
+      <div class="training-list" id="trainingList"></div>
+    </div>
+
+    <!-- Employee Progress Section -->
+    <div class="section" id="employeeProgressSection">
+      <h2>Employee Progress</h2>
+      <div id="employeeProgress"></div>
+    </div>
+
+    <!-- Assign Trainings Button -->
+    <button id="assignTrainingsButton">Assign Trainings</button>
+  </div>
+
+  <!-- Home Button with Icon -->
+  <button class="home-btn" onclick="goHome()">
+    <i class="fas fa-home"></i>
+  </button>
+
+  <script>
+    // Sample data for employees and training programs
+    const employees = [
+      { id: 1, name: 'Alice', role: 'Software Developer' },
+      { id: 2, name: 'Bob', role: 'Manager' },
+      { id: 3, name: 'Charlie', role: 'Data Analyst' },
+      { id: 4, name: 'Vasu', role: 'JAVA Developer' }
+    ];
+
+    const trainings = [
+      { id: 1, name: 'Python for Beginners', duration: '20 hours', compatibleRoles: ['Software Developer', 'Data Analyst'] },
+      { id: 2, name: 'Leadership Skills', duration: '15 hours', compatibleRoles: ['Manager'] },
+      { id: 3, name: 'Excel for Data Analysis', duration: '10 hours', compatibleRoles: ['Data Analyst'] },
+      { id: 4, name: 'J2EE', duration: '10 hours', compatibleRoles: ['JAVA Developer'] }
+    ];
+
+    // Initialize the app
+    document.addEventListener('DOMContentLoaded', function() {
+      displayEmployees();
+      displayTrainings();
+      document.getElementById('assignTrainingsButton').addEventListener('click', assignTrainings);
+    });
+
+    // Display Employees
+    function displayEmployees() {
+      const employeeList = document.getElementById('employeeList');
+      employeeList.innerHTML = '';
+      employees.forEach(employee => {
+        const employeeDiv = document.createElement('div');
+        employeeDiv.classList.add('employee-item');
+        employeeDiv.innerHTML = `
+          <h3>${employee.name}</h3>
+          <p>Role: ${employee.role}</p>
+          <button onclick="viewEmployeeProgress(${employee.id})">View Progress</button>
+        `;
+        employeeList.appendChild(employeeDiv);
+      });
+    }
+
+    // Display Training Programs
+    function displayTrainings() {
+      const trainingList = document.getElementById('trainingList');
+      trainingList.innerHTML = '';
+      trainings.forEach(training => {
+        const trainingDiv = document.createElement('div');
+        trainingDiv.classList.add('training-item');
+        trainingDiv.innerHTML = `
+          <h3>${training.name}</h3>
+          <p>Duration: ${training.duration}</p>
+          <button onclick="assignTrainingToEmployees(${training.id})">Assign to Employees</button>
+        `;
+        trainingList.appendChild(trainingDiv);
+      });
+    }
+
+    // Assign Training Programs to Employees based on their role
+    function assignTrainings() {
+      employees.forEach(employee => {
+        const employeeTrainings = trainings.filter(training =>
+          training.compatibleRoles.includes(employee.role)
+        );
+        employee.trainings = employeeTrainings.map(training => ({
+          ...training,
+          status: 'Not Started'
+        }));
+      });
+      alert('Trainings have been assigned to employees based on their roles.');
+    }
+
+    // Assign Training to an Employee
+    function assignTrainingToEmployees(trainingId) {
+      const training = trainings.find(t => t.id === trainingId);
+      employees.forEach(employee => {
+        if (training.compatibleRoles.includes(employee.role)) {
+          if (!employee.trainings) {
+            employee.trainings = [];
+          }
+          employee.trainings.push({ ...training, status: 'Not Started' });
+        }
+      });
+      alert(`Training "${training.name}" has been assigned to eligible employees.`);
+    }
+
+    // View an Employee's Progress
+    function viewEmployeeProgress(employeeId) {
+      const employee = employees.find(emp => emp.id === employeeId);
+      let progressHTML = `<h3>Progress for ${employee.name}</h3>`;
+      if (employee.trainings && employee.trainings.length > 0) {
+        employee.trainings.forEach(training => {
+          progressHTML += `
+            <p>${training.name} - Status: ${training.status}</p>
+            <button onclick="updateTrainingStatus(${employee.id}, ${training.id}, 'In Progress')">In Progress</button>
+            <button onclick="updateTrainingStatus(${employee.id}, ${training.id}, 'Completed')">Completed</button>
+          `;
+        });
+      } else {
+        progressHTML += '<p>No trainings assigned yet.</p>';
+      }
+      document.getElementById('employeeProgress').innerHTML = progressHTML;
+    }
+
+    // Update Training Status
+    function updateTrainingStatus(employeeId, trainingId, status) {
+      const employee = employees.find(emp => emp.id === employeeId);
+      const training = employee.trainings.find(t => t.id === trainingId);
+      if (training) {
+        training.status = status;
+        alert(`Training "${training.name}" status updated to ${status}`);
+        viewEmployeeProgress(employeeId); // Refresh progress view
+      }
+    }
+
+    // Function for home button click
+    function goHome() {
+      window.location.href = 'FEATURES.HTML'; // Replace with your desired home page URL
+    }
+  </script>
+</body>
+</html>

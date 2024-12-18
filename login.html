@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: sans-serif;
+}
+.banner{
+    width: 100%;
+    height: 60vh;
+    background-image: linear-gradient(rgba(0,0,0,0.75),rgba(0,0,0,0.75),url(new-bmw-g-310-r-cosmic-black-front-right-6820.jpg));
+    background-size: cover;
+    background-position: center;
+}
+.navbar{
+    width: 85%;
+    margin: auto;
+    padding: 35px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.logo{
+    width: 80px;
+    cursor: pointer;
+    background-color: black;
+    border-radius: 52%;
+    overflow: hidden;
+    border: 2px solid groove;
+}
+.content{
+    width: 100%;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    text-align: center;
+    color: #fff;
+}
+.content h1{
+    font-size: 70px;
+    margin-top: 8px;
+}
+.content p{
+    margin: 20px auto;
+    font-weight: 100;
+    line-height: 25px;
+}
+
+body {
+    font-family: Arial;
+   background-image: url(Screenshot\ 2024-12-03\ 102642.png); 
+   background-size: cover;
+   background-repeat: no-repeat;
+   align-items: center;
+   justify-content: center;
+    align-items: center;
+    height: 0vh;
+    margin: 0;
+}
+
+.login-container {
+    display: flex;
+    opacity: 0.95;
+    width: 1500px;
+      background-color: white;
+      border-radius: 0%;
+    justify-content: center;
+    align-items: center;
+    height: 50%;
+    
+}
+
+.login-box {
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 360px;
+    width: 100%;
+}
+h2 {
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: #15df41;
+    text-align: center;
+}
+
+h3 {
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: #15df41;
+    text-align: center;
+}
+
+.textbox {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.textbox input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+    background: #f9f9f9;
+}
+
+.textbox label {
+    position: absolute;
+    top: 10px;
+    left: 15px;
+    color: #aaa;
+    font-size: 16px;
+    pointer-events: none;
+    transition: 0.2s ease all;
+}
+
+.textbox input:focus ~ label,
+.textbox input:not(:placeholder-shown) ~ label {
+    top: -15px;
+    left: 10px;
+    font-size: 12px;
+    color: #007BFF;
+}
+
+.btn {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    background: #007BFF;
+    color: #fff;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s ease-in;
+}
+
+.btn:hover {
+    background: #0056b3;
+}
+
+#loginMessage {
+    color: #ff0000;
+    text-align: center;
+    margin-top: 10px;
+}
+button{
+    width: 200px;
+    padding: 15px 0;
+    text-align: center;
+    margin: 20px 10px;
+    border: 25px;
+    font-weight: bold;
+    border: 2px solid purple;
+    background: transparent;
+    color: greenyellow;
+    cursor: pointer;
+    overflow: hidden;
+    transition: 0.5s;
+}
+span{
+    background: rgb(239, 233, 198);
+    height: 100%;
+    width: 100%;
+    border-radius: 25px;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    z-index: -1;
+}
+button:hover span{
+    width: 100%;
+}
+button:hover{
+    width: 100%;
+} .social-links {
+            list-style-type: none;
+            margin-left: 5px;
+        }
+
+        .social-links li {
+            display: inline;
+            margin-right: 10px;
+        }
+
+        .social-links img {
+            width: 30px; 
+            height: auto; 
+            transition: transform 0.2s;
+        }
+
+        .social-links img:hover {
+            transform: scale(1.1); 
+        }
+        footer {
+      background-color: #333;
+      color: white;
+      text-align: center;
+      padding: 10px 0; 
+      margin-top: auto;
+      font-size: 14px; 
+        }
+
+    footer a {
+      color: #4CAF50; 
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+    </style>
+</head>
+<body>
+    <div class="banner">
+        <div class="navbar">
+           <a href="FEATURES.HTML"> <img src="a050788c-c967-4a21-92bb-9bfd89d73113-removebg-preview.png" class="logo"> </a></p>
+        </div>
+    </div>
+    <div class="login-container">
+        <div class="login-box">
+            <h2>Login</h2>
+            <form id="loginForm">
+                <div class="textbox">
+                    <input type="text" id="username" required placeholder="username">
+                   
+                </div>
+                <div class="textbox">
+                    <input type="password" id="password" required placeholder="password">
+                 
+                </div>
+                <button type="submit" class="btn">Login</button>
+                <p id="loginMessage"></p>
+                <button type="home" class="btn"><a href="forgot.html" style="text-decoration: none; color: #f9f9f9;">Forgot Password</a></button>
+                
+    <h3><a href="https://www.bmw.in/en/more-bmw/customer-support.html">Connect with Us!</a></h3>
+    <ul class="social-links">
+        <li><a href="https://www.facebook.com/yourprofile" target="_blank"><img src="facebook.png"></a></li>
+     
+        <li><a href="https://twitter.com/yourprofile" target="_blank" style="padding: 5px;"><img src="x.png"></a></li>
+        <li><a href="https://www.instagram.com/yourprofile" target="_blank"><img src="insta.png" style="padding: 5px;"></a></li>   
+        <li><a href="https://www.linkedin.com/in/yourprofile" target="_blank"><img src="link.png" style="padding: 5px;"></a></li>
+        <li><a href="https://www.youtube.com/c/yourchannel" target="_blank"><img src="you.png"></a></li>
+    </ul>   </form>
+    <footer>
+        ©All rights reserved by <a href="https://www.bmw.in/en/index.html">BMW</a> / Designed by Vasu
+      </footer> </div>
+</div>
+
+          <script>
+    function loginRedirect(event) {
+        // Prevent form submission
+        event.preventDefault();
+
+        // Get values from the form
+        var username = document.getElementById("username").value;
+        var password = document.getElementById("password").value;
+        var errorMessage = document.getElementById("loginMessage"); // Get the error message element
+
+        // Clear any previous error messages
+        errorMessage.textContent = '';
+        errorMessage.style.color = ''; // Reset the color
+
+        // Check if the username and password match the correct credentials
+        if (username === "user" && password === "password") {
+            // Redirect to FEATURES.html if credentials are correct
+            window.location.href = "FEATURES.html";  // Redirect to the FEATURES page
+        } else {
+            // Display error message if credentials are incorrect
+            errorMessage.textContent = "Invalid login credentials. Please try again.";
+            errorMessage.style.color = "red"; // Set the color to red
+        }
+    }
+
+    // Add event listener for the form submission
+    document.getElementById("loginForm").addEventListener("submit", loginRedirect);
+</script>
+
+
+</script>
+</body>
+</html>

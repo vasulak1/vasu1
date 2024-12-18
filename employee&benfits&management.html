@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Benefits Management</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f7fa;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 60%;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #007bff;
+        }
+
+        h2 {
+            margin-top: 30px;
+            color: #333;
+        }
+
+        label {
+            font-weight: bold;
+            display: block;
+            margin-top: 10px;
+        }
+
+        input[type="text"], input[type="date"], input[type="number"], select, textarea {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        .form-section {
+            margin-bottom: 30px;
+        }
+
+        button {
+            width: 100%;
+            background-color: #28a745;
+            color: white;
+            padding: 15px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+
+        button:hover {
+            background-color: #218838;
+        }
+
+        .benefit-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 30px;
+        }
+
+        .benefit-table th, .benefit-table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+
+        .home-btn {
+            position: fixed;
+            bottom: 20px; /* Position 20px from the bottom */
+            right: 20px; /* Position 20px from the right */
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            width: 50px;
+            height: 50px;
+            cursor: pointer;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            text-align: center;
+        }
+
+        .home-btn i {
+            font-size: 25px;
+        }
+
+        .home-btn:hover {
+            background-color: #0056b3;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Employee Benefits Management</h1>
+
+        <form id="benefits-form">
+            <section class="form-section">
+                <h2>Employee Information</h2>
+                <label for="employee-name">Employee Name:</label>
+                <input type="text" id="employee-name" name="employee-name" required>
+
+                <label for="employee-id">Employee ID:</label>
+                <input type="text" id="employee-id" name="employee-id" required>
+            </section>
+
+            <section class="form-section">
+                <h2>Health Insurance</h2>
+                <label for="health-insurance">Do you have Health Insurance?</label>
+                <select id="health-insurance" name="health-insurance" required>
+                    <option value="yes">Yes</option>
+                    <option value="no">No</option>
+                </select>
+
+                <label for="insurance-provider">Insurance Provider (if yes):</label>
+                <input type="text" id="insurance-provider" name="insurance-provider" disabled>
+            </section>
+
+            <section class="form-section">
+                <h2>Retirement Plans</h2>
+                <label for="retirement-plan">Do you have a Retirement Plan?</label>
+                <select id="retirement-plan" name="retirement-plan" required>
+                    <option value="yes">Yes</option>
+                    <option value="no">No</option>
+                </select>
+
+                <label for="pension-contribution">Monthly Pension Contribution:</label>
+                <input type="number" id="pension-contribution" name="pension-contribution" disabled>
+
+                <label for="retirement-age">Planned Retirement Age:</label>
+                <input type="number" id="retirement-age" name="retirement-age" min="50" max="75" disabled>
+            </section>
+
+            <section class="form-section">
+                <h2>Wellness Programs</h2>
+                <label for="wellness-program">Are you enrolled in a Wellness Program?</label>
+                <select id="wellness-program" name="wellness-program" required>
+                    <option value="yes">Yes</option>
+                    <option value="no">No</option>
+                </select>
+
+                <label for="wellness-details">Wellness Program Details:</label>
+                <textarea id="wellness-details" name="wellness-details" disabled></textarea>
+            </section>
+
+            <button type="submit">Save Benefits Information</button>
+        </form>
+
+        <div id="benefits-summary">
+            <h2>Benefits Summary</h2>
+            <table class="benefit-table">
+                <thead>
+                    <tr>
+                        <th>Employee Name</th>
+                        <th>Employee ID</th>
+                        <th>Health Insurance</th>
+                        <th>Insurance Provider</th>
+                        <th>Retirement Plan</th>
+                        <th>Pension Contribution</th>
+                        <th>Retirement Age</th>
+                        <th>Wellness Program</th>
+                        <th>Program Details</th>
+                    </tr>
+                </thead>
+                <tbody id="benefits-summary-body"></tbody>
+            </table>
+        </div>
+    </div>
+
+    <a href="FEATURES.HTML">
+        <button class="home-btn">
+            <i class="fas fa-home"></i>
+        </button>
+    </a>
+
+    <script>
+        // Enabling/Disabling Fields Based on Selections
+        document.getElementById('health-insurance').addEventListener('change', function () {
+            const insuranceProvider = document.getElementById('insurance-provider');
+            insuranceProvider.disabled = this.value === 'no';
+        });
+
+        document.getElementById('retirement-plan').addEventListener('change', function () {
+            const pensionContribution = document.getElementById('pension-contribution');
+            const retirementAge = document.getElementById('retirement-age');
+            pensionContribution.disabled = this.value === 'no';
+            retirementAge.disabled = this.value === 'no';
+        });
+
+        document.getElementById('wellness-program').addEventListener('change', function () {
+            const wellnessDetails = document.getElementById('wellness-details');
+            wellnessDetails.disabled = this.value === 'no';
+        });
+
+        // Handle Form Submission
+        document.getElementById('benefits-form').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            // Collect form data
+            const formData = new FormData(e.target);
+            let data = {};
+            formData.forEach((value, key) => {
+                data[key] = value;
+            });
+
+            // Generate Benefits Summary
+            const benefitsSummaryBody = document.getElementById('benefits-summary-body');
+            const newRow = document.createElement('tr');
+            newRow.innerHTML = `
+                <td>${data['employee-name']}</td>
+                <td>${data['employee-id']}</td>
+                <td>${data['health-insurance']}</td>
+                <td>${data['insurance-provider'] || 'N/A'}</td>
+                <td>${data['retirement-plan']}</td>
+                <td>${data['pension-contribution'] || 'N/A'}</td>
+                <td>${data['retirement-age'] || 'N/A'}</td>
+                <td>${data['wellness-program']}</td>
+                <td>${data['wellness-details'] || 'N/A'}</td>
+            `;
+            benefitsSummaryBody.appendChild(newRow);
+
+            // Clear form fields after submission
+            e.target.reset();
+        });
+    </script>
+
+</body>
+</html>

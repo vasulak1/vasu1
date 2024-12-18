@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Engagement Survey & Feedback</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f7fc;
+            margin: 0;
+            padding: 0;
+        }
+
+        .form-container {
+            width: 80%;
+            margin: 30px auto;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #4CAF50;
+        }
+
+        h2 {
+            margin-top: 20px;
+            color: #333;
+        }
+
+        label {
+            font-weight: bold;
+            display: block;
+            margin-top: 10px;
+        }
+
+        input[type="text"], input[type="number"], input[type="range"], select, textarea {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        textarea {
+            height: 100px;
+        }
+
+        .rating input[type="radio"] {
+            margin-right: 10px;
+        }
+
+        button {
+            width: 100%;
+            background-color: #4CAF50;
+            color: white;
+            padding: 15px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        #rating-value {
+            font-weight: bold;
+        }
+
+        /* Home button styles */
+        .home-btn {
+            position: fixed;
+            bottom: 20px; /* Position 20px from the bottom */
+            right: 20px; /* Position 20px from the right */
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            width: 10px;
+            border: none;
+            cursor: pointer;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999; /* Ensure it appears on top of other content */
+            text-align: center;
+        }
+
+        .home-btn i {
+            font-size: 20px;
+        }
+
+        .home-btn:hover {
+            background-color: #0056b3;
+        }
+    </style>
+
+    <!-- Include Font Awesome for the home icon -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="form-container">
+        <h1>Employee Engagement Survey & Feedback Form</h1>
+        <form id="engagement-form">
+            <!-- Employee Information -->
+            <section>
+                <h2>Employee Information (Optional)</h2>
+                <label for="name">Employee Name:</label>
+                <input type="text" id="name" name="name">
+
+                <label for="department">Department:</label>
+                <select id="department" name="department">
+                    <option value="hr">HR</option>
+                    <option value="marketing">Marketing</option>
+                    <option value="it">IT</option>
+                    <option value="sales">Sales</option>
+                    <option value="operations">Operations</option>
+                </select>
+
+                <label for="role">Position/Role:</label>
+                <input type="text" id="role" name="role">
+            </section>
+
+            <!-- Employee Satisfaction Survey -->
+            <section>
+                <h2>Employee Satisfaction Survey</h2>
+                <label>Workplace is positive and inclusive:</label>
+                <div class="rating">
+                    <input type="radio" name="workplace" value="strongly_agree"> Strongly Agree
+                    <input type="radio" name="workplace" value="agree"> Agree
+                    <input type="radio" name="workplace" value="neutral"> Neutral
+                    <input type="radio" name="workplace" value="disagree"> Disagree
+                    <input type="radio" name="workplace" value="strongly_disagree"> Strongly Disagree
+                </div>
+
+                <label>I feel valued and respected at work:</label>
+                <div class="rating">
+                    <input type="radio" name="valued" value="strongly_agree"> Strongly Agree
+                    <input type="radio" name="valued" value="agree"> Agree
+                    <input type="radio" name="valued" value="neutral"> Neutral
+                    <input type="radio" name="valued" value="disagree"> Disagree
+                    <input type="radio" name="valued" value="strongly_disagree"> Strongly Disagree
+                </div>
+            </section>
+
+            <!-- Employee Feedback -->
+            <section>
+                <h2>Employee Feedback</h2>
+                <label for="suggestions">Suggestions for Improvement:</label>
+                <textarea id="suggestions" name="suggestions"></textarea>
+
+                <label for="enjoy">What do you enjoy most about working here?</label>
+                <textarea id="enjoy" name="enjoy"></textarea>
+            </section>
+
+            <!-- Recognition Section -->
+            <section>
+                <h2>Employee Recognition</h2>
+                <label for="colleague-name">Nominate a colleague for recognition:</label>
+                <input type="text" id="colleague-name" name="colleague-name">
+
+                <label for="nomination-reason">Reason for Nomination:</label>
+                <textarea id="nomination-reason" name="nomination-reason"></textarea>
+
+                <label for="recognize-yourself">Would you like to be recognized for any specific achievements?</label>
+                <textarea id="recognize-yourself" name="recognize-yourself"></textarea>
+            </section>
+
+            <!-- Engagement Programs & Benefits -->
+            <section>
+                <h2>Engagement Programs & Benefits</h2>
+                <label for="programs">Which engagement programs would you like to see more of?</label>
+                <select id="programs" name="programs" multiple>
+                    <option value="team-building">Team-building activities</option>
+                    <option value="professional-development">Professional development programs</option>
+                    <option value="wellness">Wellness programs</option>
+                    <option value="social-events">Social events</option>
+                    <option value="flexible-work">Flexible work arrangements</option>
+                </select>
+
+                <label for="recognition-preference">How do you prefer to receive recognition?</label>
+                <select id="recognition-preference" name="recognition-preference">
+                    <option value="public">Public recognition (e.g., team meetings)</option>
+                    <option value="private">Private recognition (e.g., one-on-one)</option>
+                    <option value="other">Other</option>
+                </select>
+            </section>
+
+            <!-- Engagement Rating -->
+            <section>
+                <h2>Overall Engagement Rating</h2>
+                <label for="engagement-rating">On a scale of 1 to 10, how engaged do you feel with your work?</label>
+                <input type="range" id="engagement-rating" name="engagement-rating" min="1" max="10" step="1">
+                <span id="rating-value">5</span>
+            </section>
+
+            <!-- Additional Comments -->
+            <section>
+                <h2>Additional Comments</h2>
+                <textarea id="comments" name="comments"></textarea>
+            </section>
+
+            <button type="submit">Submit Feedback</button>
+        </form>
+    </div>
+
+    <!-- Home Button with Icon -->
+    <a href="FEATURES.HTML"><button class="home-btn">
+        <i class="fas fa-home"></i>
+    </button></a>
+
+    <script>
+        // Update the engagement rating value as the slider moves
+        const engagementRatingSlider = document.getElementById("engagement-rating");
+        const ratingValue = document.getElementById("rating-value");
+
+        engagementRatingSlider.addEventListener("input", function () {
+            ratingValue.textContent = engagementRatingSlider.value;
+        });
+
+        // Handle form submission (just for demonstration here)
+        document.getElementById("engagement-form").addEventListener("submit", function (e) {
+            e.preventDefault(); // Prevent form submission for demonstration
+            
+            // Collect form data
+            const formData = new FormData(e.target);
+            let data = {};
+            formData.forEach((value, key) => {
+                data[key] = value;
+            });
+
+            console.log("Form Data Submitted:", data);
+
+            alert("Thank you for your feedback! Your responses have been recorded.");
+        });
+    </script>
+</body>
+</html>

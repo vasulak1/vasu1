@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HRM Tool Features</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+
+        header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            position: relative; /* To position the icons inside the header */
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        h1, h2 {
+            color: #333;
+        }
+
+        .feature-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .feature-card {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+
+        .feature-card p {
+            font-size: 1rem;
+            color: #666;
+        }
+
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .feature-icon {
+            font-size: 30px;
+            color: #4CAF50;
+            margin-bottom: 10px;
+        }
+
+        .cta-button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            text-decoration: none;
+            font-size: 1rem;
+            text-align: center;
+            display: inline-block;
+            margin-top: 20px;
+        }
+
+        .cta-button:hover {
+            background-color: #45a049;
+        }
+
+        /* Positioning the profile and notification icons */
+        .header-icons {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            gap: 15px;
+        }
+
+        .header-icons a {
+            text-decoration: none;
+            color: white;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.3);
+            transition: background-color 0.3s;
+        }
+
+        .header-icons a:hover {
+            background-color: rgba(255, 255, 255, 0.6);
+        }
+
+        /* Logout Button */
+        .logout-button {
+            background-color: #f44336;
+            color: white;
+            font-size: 1rem;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+
+        .logout-button:hover {
+            background-color: #e53935;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <h1>HRM Tool Features</h1>
+        <p>Discover how our HRM tool can simplify and streamline your HR processes</p>
+
+        <!-- Profile and Notification Icons -->
+        <div class="header-icons">
+            <!-- Profile Icon -->
+            <a href="PROFILE.HTML" title="Profile">
+                <img id="profile-icon" src="2021-bmw-m4-toronto-red-08.jpg" alt="Profile Icon" style="border-radius: 50%; width: 40px; height: 40px; object-fit: cover;">
+            </a>
+
+            <!-- Notification Icon -->
+            <a href="#" title="Notifications"><span>🔔</span></a>
+
+            <!-- Logout Button -->
+            <button class="logout-button" onclick="logout()">Logout</button>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container">
+
+        <!-- Profile Header -->
+        <h2>Key Features of Our HRM Tool</h2>
+
+        <div class="feature-list">
+            <!-- Employee Management -->
+            <div class="feature-card">
+                <a href="Employee-Information-Management.html" style="text-decoration: none;"><div class="feature-icon">👨‍💼</div>
+                <h3>Employee Information Management</h3>
+                <p>Store and manage employee data, including personal information, job roles, performance, and documentation, all in one place.</p>
+           </a> </div>
+
+            <!-- Recruitment -->
+            <div class="feature-card">
+                <div class="feature-icon">💼</div>
+               <a href="requirementsandonboarding.html" style="text-decoration: none;"> <h3>Recruitment & Onboarding</h3>
+                <p>Efficiently manage the recruitment process, from job postings to interviews, candidate tracking, and smooth onboarding for new hires.</p>
+            </a></div>
+
+            <!-- Time Management -->
+            <div class="feature-card">
+                <a href="TIME&ATTENDENCE.HTML" style="text-decoration: none; color: none;">
+                    <div class="feature-icon">⏰</div>
+                    <h3>Time & Attendance Management</h3>
+                    <p>Track employee working hours, attendance, and shift scheduling. Automate time-off requests and monitor absenteeism.</p>
+                </a>
+            </div>
+
+            <!-- Payroll Management -->
+ <div class="feature-card">
+    <a href="PAYROLL.HTML" style="text-decoration: none;">  <div class="feature-icon">💵</div>
+                <h3>Payroll Management</h3>
+                <p>Automate payroll calculations, tax deductions, and generate payslips. Ensure timely and accurate salary payments.</p>
+           </a> </div>
+
+            <!-- Performance Management -->
+            <div class="feature-card">
+              <a href="PERFOEMANCE.html" style="text-decoration: none;">  <div class="feature-icon">📊</div>
+                <h3>Performance Management</h3>
+                <p>Set employee goals, conduct performance reviews, and track key performance indicators (KPIs) to enhance productivity and growth.</p>
+           </a> </div>
+
+            <!-- Training & Development -->
+            <div class="feature-card">
+                <a href="Training&Development.html" style="text-decoration: none;"> <div class="feature-icon">🎓</div>
+                <h3>Training & Development</h3>
+                <p>Provide personalized development plans, access to training programs, and track employees' learning progress.</p>
+           </a> </div>
+
+            <!-- Employee Engagement -->
+            <div class="feature-card">
+             <a href="employeement.html" style="text-decoration: none;">   <div class="feature-icon">💬</div>
+                <h3>Employee Engagement</h3>
+                <p>Enhance employee satisfaction and engagement with surveys, feedback, recognition programs, and more.</p>
+            </a></div>
+
+            <!-- Compliance & Reporting -->
+            <div class="feature-card">
+               <a href="Compilance&Reporting.html" style="text-decoration: none; color: none;"> <div class="feature-icon">📑</div>
+                <h3>Compliance & Reporting</h3>
+                <p>Ensure compliance with labor laws and company policies. Automate reporting and keep records for audits and legal purposes.</p>
+            </a> </div>
+
+            <!-- Benefits Management -->
+            <div class="feature-card">
+               <a href="employee&benfits&management.html" style="text-decoration: none;"> <div class="feature-icon">💼</div>
+                <h3>Employee Benefits Management</h3>
+                <p>Manage and track employee benefits, including health insurance, retirement plans, and wellness programs.</p>
+            </a></div>
+
+        </div>
+
+        <!-- Call to Action -->
+        <div style="text-align: center; margin-top: 40px;">
+            <a href="#cta" class="cta-button">Request a Demo</a>
+        </div>
+
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 HRM Tool | All Rights Reserved</p>
+    </footer>
+
+    <script>
+        // Function to handle logout
+        function logout() {
+            // Redirect to login page (or any page you'd prefer)
+            window.location.href = "login.html";  // Replace with actual login page URL
+        }
+    </script>
+
+</body>
+</html>

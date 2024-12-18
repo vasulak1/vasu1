@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile Page - HRM Tool</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+
+        header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            position: relative;
+        }
+
+        /* Back Button Styling */
+        .back-btn {
+            position: absolute;
+            left: 20px;
+            top: 20px;
+            background-color: transparent;
+            color: white;
+            font-size: 1.5rem;
+            border: none;
+            cursor: pointer;
+        }
+
+        .back-btn:hover {
+            color: #ddd;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px;
+        }
+
+        .profile-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        /* Circle Profile Icon */
+        .profile-icon {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background-color: #4CAF50;
+            color: white;
+            font-size: 3rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 20px;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .profile-icon:hover {
+            background-color: #45a049;
+        }
+
+        /* Plus Symbol inside Circle, positioned to the right */
+        .profile-icon .plus-symbol {
+            font-size: 2rem;
+            position: absolute;
+            right: 10px;
+            bottom: 10px;
+        }
+
+        /* Profile Details Styling */
+        .profile-details {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .profile-details .card {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .profile-details .card h3 {
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+            color: #4CAF50;
+        }
+
+        .profile-details .card label {
+            font-weight: bold;
+            margin-top: 10px;
+            display: block;
+        }
+
+        .profile-details .card input,
+        .profile-details .card select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin-top: 5px;
+        }
+
+        .profile-details .card input[type="file"] {
+            padding: 0;
+        }
+
+        .profile-details .card textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin-top: 5px;
+            resize: vertical;
+        }
+
+        .btn-container {
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        .cta-button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            font-size: 1rem;
+            text-decoration: none;
+            text-align: center;
+            display: inline-block;
+        }
+
+        .cta-button:hover {
+            background-color: #45a049;
+        }
+
+        .cta-button.secondary {
+            background-color: #ccc;
+        }
+
+        .cta-button.secondary:hover {
+            background-color: #999;
+        }
+
+        /* Profile Picture Section Styling */
+        .profile-header .profile-pic-container {
+            position: relative;
+            display: inline-block;
+        }
+
+        .profile-pic-container img {
+            border-radius: 50%;
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+        }
+
+        /* Hidden file input */
+        #file-input {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <!-- Back Button -->
+        <a href="FEATURES.HTML"><button class="back-btn" onclick="window.history.back()">←</button></a>
+        <h1>Profile Page</h1>
+        <p>Manage your personal and professional information</p>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container">
+
+        <!-- Profile Header -->
+        <div class="profile-header">
+            <div class="profile-pic-container">
+                <div class="profile-icon" onclick="document.getElementById('file-input').click()">
+                    <span class="plus-symbol">+</span>
+                </div>
+                <input type="file" id="file-input" accept="image/*" onchange="updateProfilePicture(event)">
+            </div>
+        </div>
+
+        <!-- Profile Details -->
+        <div class="profile-details">
+            <div class="card">
+                <h3>Personal Information</h3>
+                <label for="full-name">Full Name</label>
+                <input type="text" id="full-name" value="John Doe">
+
+                <label for="email">Email</label>
+                <input type="email" id="email" value="johndoe@example.com">
+
+                <label for="phone">Phone Number</label>
+                <input type="tel" id="phone" value="(123) 456-7890">
+
+                <label for="dob">Date of Birth</label>
+                <input type="date" id="dob" value="1990-05-15">
+            </div>
+
+            <div class="card">
+                <h3>Job Information</h3>
+                <label for="job-title">Job Title</label>
+                <input type="text" id="job-title" value="Software Engineer">
+
+                <label for="department">Department</label>
+                <input type="text" id="department" value="Engineering">
+
+                <label for="manager">Manager</label>
+                <input type="text" id="manager" value="Jane Smith">
+
+                <label for="hire-date">Hire Date</label>
+                <input type="date" id="hire-date" value="2015-09-01">
+            </div>
+
+       </div>
+
+        <!-- Buttons for editing or saving -->
+        <div class="btn-container">
+            <button class="cta-button secondary" onclick="editProfile()">Edit Profile</button>
+            <button class="cta-button" onclick="saveProfile()">Save Profile</button>
+        </div>
+
+    </div>
+
+    <script>
+        // Function to handle profile picture update
+        function updateProfilePicture(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    document.querySelector('.profile-icon').style.backgroundImage = `url(${e.target.result})`;
+                    document.querySelector('.profile-icon').style.backgroundSize = 'cover';
+                    document.querySelector('.plus-symbol').style.display = 'none'; // Hide the + symbol after profile image is uploaded
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        // Function to enable editing of profile details
+        function editProfile() {
+            const inputs = document.querySelectorAll('.profile-details input, .profile-details textarea');
+            inputs.forEach(input => input.disabled = false);
+
+            document.querySelector('.cta-button.secondary').style.display = 'none';
+            document.querySelector('.cta-button').textContent = 'Save Changes';
+        }
+
+        // Function to save profile changes
+        function saveProfile() {
+            const fullName = document.getElementById('full-name').value;
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+            const dob = document.getElementById('dob').value;
+            const jobTitle = document.getElementById('job-title').value;
+            const department = document.getElementById('department').value;
+            const manager = document.getElementById('manager').value;
+            const hireDate = document.getElementById('hire-date').value;
+
+            alert(`Profile saved successfully! 
+                Name: ${fullName}, 
+                Email: ${email}, 
+                Phone: ${phone}, 
+                Date of Birth: ${dob}, 
+                Job Title: ${jobTitle}, 
+                Department: ${department}, 
+                Manager: ${manager}, 
+                Hire Date: ${hireDate}`);
+            
+            // Disable inputs again after saving
+            const inputs = document.querySelectorAll('.profile-details input, .profile-details textarea');
+            inputs.forEach(input => input.disabled = true);
+
+            document.querySelector('.cta-button.secondary').style.display = 'inline-block';
+            document.querySelector('.cta-button').textContent = 'Save Profile';
+        }
+    </script>
+
+</body>
+</html>

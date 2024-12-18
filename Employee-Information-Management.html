@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Information Management</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #da9c31;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #a44fd6;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            position: relative;
+        }
+
+        /* Style for the back button */
+        .back-button {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 20px;
+            color: white;
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .form-container {
+            background-color: rgb(158, 102, 199);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 40px;
+        }
+
+        .form-container h2 {
+            text-align: center;
+            color: #080119;
+        }
+
+        .form-container label {
+            display: block;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+
+        .form-container input,
+        .form-container select,
+        .form-container textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin-top: 5px;
+        }
+
+        .form-container button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            font-size: 1rem;
+            margin-top: 20px;
+            cursor: pointer;
+        }
+
+        .form-container button:hover {
+            background-color: #45a049;
+        }
+
+        .employee-list {
+            margin-top: 40px;
+        }
+
+        .employee-list table {
+            width: 100%;
+            border-collapse: collapse;
+            border: 1px solid #ddd;
+        }
+
+        .employee-list th,
+        .employee-list td {
+            padding: 10px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+
+        .employee-list th {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        .employee-list tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        .employee-list button {
+            background-color: #f44336;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+
+        .employee-list button:hover {
+            background-color: #e53935;
+        }
+
+        /* Style for the search input */
+        .search-container {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .search-container input {
+            padding: 10px;
+            font-size: 1rem;
+            width: 300px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <!-- Back Button -->
+       <a href="FEATURES.HTML"> <button class="back-button" onclick="window.history.back()">←</button></a>
+        <h1>Employee Information Management</h1>
+    </header>
+
+    <div class="container">
+
+        <!-- Search Bar -->
+        <div class="search-container">
+            <input type="text" id="search-input" placeholder="Search Employees..." oninput="searchEmployees()">
+        </div>
+
+        <!-- Add/Edit Employee Form -->
+        <div class="form-container">
+            <h2>Employee Details</h2>
+            <form id="employee-form">
+                <label for="emp-name">Employee Name</label>
+                <input type="text" id="emp-name" required>
+
+                <label for="emp-email">Email</label>
+                <input type="email" id="emp-email" required>
+
+                <label for="emp-job-title">Job Title</label>
+                <input type="text" id="emp-job-title" required>
+
+                <label for="emp-department">Department</label>
+                <input type="text" id="emp-department" required>
+
+                <label for="emp-phone">Phone</label>
+                <input type="tel" id="emp-phone" required>
+
+                <label for="emp-address">Address</label>
+                <textarea id="emp-address" required></textarea>
+
+                <button type="submit">Add Employee</button>
+            </form>
+        </div>
+
+        <!-- Employee List Table -->
+        <div class="employee-list">
+            <h2>Employee List</h2>
+            <table id="employee-table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Job Title</th>
+                        <th>Department</th>
+                        <th>Phone</th>
+                        <th>Address</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Employee rows will be inserted here dynamically -->
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
+    <script>
+        let employees = [];
+
+        // Function to add an employee to the table
+        function addEmployeeToTable(employee) {
+            const table = document.getElementById("employee-table").getElementsByTagName('tbody')[0];
+            const row = table.insertRow();
+
+            row.insertCell(0).textContent = employee.name;
+            row.insertCell(1).textContent = employee.email;
+            row.insertCell(2).textContent = employee.jobTitle;
+            row.insertCell(3).textContent = employee.department;
+            row.insertCell(4).textContent = employee.phone;
+            row.insertCell(5).textContent = employee.address;
+
+            const actionsCell = row.insertCell(6);
+            const editButton = document.createElement('button');
+            editButton.textContent = 'Edit';
+            editButton.onclick = () => editEmployee(row, employee);
+            actionsCell.appendChild(editButton);
+
+            const deleteButton = document.createElement('button');
+            deleteButton.textContent = 'Delete';
+            deleteButton.onclick = () => deleteEmployee(row, employee);
+            actionsCell.appendChild(deleteButton);
+        }
+
+        // Function to edit an employee's details
+        function editEmployee(row, employee) {
+            document.getElementById('emp-name').value = employee.name;
+            document.getElementById('emp-email').value = employee.email;
+            document.getElementById('emp-job-title').value = employee.jobTitle;
+            document.getElementById('emp-department').value = employee.department;
+            document.getElementById('emp-phone').value = employee.phone;
+            document.getElementById('emp-address').value = employee.address;
+
+            // Change the submit button to "Update Employee"
+            const submitButton = document.querySelector('.form-container button');
+            submitButton.textContent = 'Update Employee';
+
+            // Remove the old employee from the table
+            row.remove();
+
+            // Change the form submit to update employee instead of add
+            document.getElementById('employee-form').onsubmit = (e) => {
+                e.preventDefault();
+                updateEmployee(row, employee);
+            };
+        }
+
+        // Function to update employee details
+        function updateEmployee(row, oldEmployee) {
+            const employee = {
+                name: document.getElementById('emp-name').value,
+                email: document.getElementById('emp-email').value,
+                jobTitle: document.getElementById('emp-job-title').value,
+                department: document.getElementById('emp-department').value,
+                phone: document.getElementById('emp-phone').value,
+                address: document.getElementById('emp-address').value
+            };
+
+            // Update the employee in the array
+            const index = employees.indexOf(oldEmployee);
+            employees[index] = employee;
+
+            // Add updated employee to the table
+            addEmployeeToTable(employee);
+
+            // Reset form and change the button back to "Add Employee"
+            document.getElementById('employee-form').reset();
+            const submitButton = document.querySelector('.form-container button');
+            submitButton.textContent = 'Add Employee';
+
+            // Set form submit back to adding employee
+            document.getElementById('employee-form').onsubmit = addEmployee;
+        }
+
+        // Function to delete an employee
+        function deleteEmployee(row, employee) {
+            // Remove the employee from the array
+            const index = employees.indexOf(employee);
+            employees.splice(index, 1);
+            
+            // Remove the row from the table
+            row.remove();
+        }
+
+        // Function to handle form submission and add employee
+        function addEmployee(e) {
+            e.preventDefault();
+
+            const employee = {
+                name: document.getElementById('emp-name').value,
+                email: document.getElementById('emp-email').value,
+                jobTitle: document.getElementById('emp-job-title').value,
+                department: document.getElementById('emp-department').value,
+                phone: document.getElementById('emp-phone').value,
+                address: document.getElementById('emp-address').value
+            };
+
+            employees.push(employee);
+            addEmployeeToTable(employee);
+
+            // Reset form after adding employee
+            document.getElementById('employee-form').reset();
+        }
+
+        // Function to search employees
+        function searchEmployees() {
+            const searchQuery = document.getElementById('search-input').value.toLowerCase();
+            const tableRows = document.getElementById("employee-table").getElementsByTagName('tbody')[0].rows;
+
+            for (let row of tableRows) {
+                const employeeName = row.cells[0].textContent.toLowerCase();
+                const employeeEmail = row.cells[1].textContent.toLowerCase();
+
+                if (employeeName.includes(searchQuery) || employeeEmail.includes(searchQuery)) {
+                    row.style.display = "";
+                } else {
+                    row.style.display = "none";
+                }
+            }
+        }
+
+        // Attach the addEmployee function to the form submission event
+        document.getElementById('employee-form').onsubmit = addEmployee;
+    </script>
+
+</body>
+</html>

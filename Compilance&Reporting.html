@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compliance & Reporting</title>
+    <!-- Add Font Awesome CDN for Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #7396b8;
+            margin: 0;
+            padding: 0;
+        }
+
+        .form-container {
+            width: 60%;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: rgb(236, 148, 54);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #007bff;
+        }
+
+        h2 {
+            margin-top: 20px;
+            color: #333;
+        }
+
+        label {
+            font-weight: bold;
+            display: block;
+            margin-top: 10px;
+        }
+
+        input[type="text"], input[type="date"], input[type="number"], select, textarea {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        .rating input[type="radio"] {
+            margin-right: 10px;
+        }
+
+        button {
+            width: 100%;
+            background-color: #28a745;
+            color: white;
+            padding: 15px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+
+        button:hover {
+            background-color: #218838;
+        }
+
+        #compliance-report {
+            margin-top: 30px;
+            padding: 20px;
+            background-color: #e9ecef;
+            border-radius: 8px;
+            display: none;
+        }
+
+        .compliance-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        .compliance-table th, .compliance-table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+
+        .home-btn {
+            position: fixed;
+            bottom: 20px; /* Position 20px from the bottom */
+            right: 20px; /* Position 20px from the right */
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            width: 50px; /* Increase width to accommodate the icon */
+            height: 40px; /* Square button */
+            cursor: pointer;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999; /* Ensure it appears on top of other content */
+            text-align: center;
+        }
+
+        .home-btn i {
+            font-size: 25px; /* Adjust size of the home icon */
+        }
+
+        .home-btn:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="form-container">
+        <h1>Compliance & Reporting Form</h1>
+        <form id="compliance-form">
+            <section>
+                <h2>Employee Information</h2>
+                <label for="employee-name">Employee Name:</label>
+                <input type="text" id="employee-name" name="employee-name">
+
+                <label for="department">Department:</label>
+                <select id="department" name="department">
+                    <option value="hr">HR</option>
+                    <option value="marketing">Marketing</option>
+                    <option value="it">IT</option>
+                    <option value="sales">Sales</option>
+                    <option value="operations">Operations</option>
+                </select>
+
+                <label for="employee-id">Employee ID:</label>
+                <input type="text" id="employee-id" name="employee-id">
+            </section>
+
+            <section>
+                <h2>Compliance Check</h2>
+                <label for="work-hours">Total Work Hours:</label>
+                <input type="number" id="work-hours" name="work-hours" min="1" max="100" required>
+
+                <label for="overtime">Overtime Worked:</label>
+                <input type="number" id="overtime" name="overtime" min="0" max="50" required>
+
+                <label for="safety-incident">Any Safety Incidents?</label>
+                <select id="safety-incident" name="safety-incident">
+                    <option value="yes">Yes</option>
+                    <option value="no">No</option>
+                </select>
+            </section>
+
+            <section>
+                <h2>Labor Law Compliance</h2>
+                <label for="labor-law-violation">Any Labor Law Violations?</label>
+                <select id="labor-law-violation" name="labor-law-violation">
+                    <option value="yes">Yes</option>
+                    <option value="no">No</option>
+                </select>
+
+                <label for="violation-details">If yes, provide details:</label>
+                <textarea id="violation-details" name="violation-details"></textarea>
+            </section>
+
+            <section>
+                <h2>Reporting and Auditing</h2>
+                <label for="audit-date">Date of Audit:</label>
+                <input type="date" id="audit-date" name="audit-date">
+
+                <label for="audit-comments">Comments for Audit:</label>
+                <textarea id="audit-comments" name="audit-comments"></textarea>
+            </section>
+
+            <button type="submit">Generate Compliance Report</button>
+        </form>
+    </div>
+
+    <!-- Generated Compliance Report -->
+    <div id="compliance-report">
+        <h2>Compliance Report</h2>
+        <table class="compliance-table">
+            <thead>
+                <tr>
+                    <th>Employee Name</th>
+                    <th>Department</th>
+                    <th>Work Hours</th>
+                    <th>Overtime</th>
+                    <th>Safety Incident</th>
+                    <th>Labor Law Violation</th>
+                    <th>Audit Date</th>
+                </tr>
+            </thead>
+            <tbody id="report-body"></tbody>
+        </table>
+    </div>
+
+    <!-- Home Button with Icon -->
+    <a href="FEATURES.HTML"><button class="home-btn">
+        <i class="fas fa-home"></i>
+    </button></a>
+
+    <script>
+        // Handle form submission
+        document.getElementById('compliance-form').addEventListener('submit', function(e) {
+            e.preventDefault(); // Prevent form submission for demonstration
+            
+            // Collect form data
+            const formData = new FormData(e.target);
+            let data = {};
+            formData.forEach((value, key) => {
+                data[key] = value;
+            });
+
+            // Display the compliance report
+            const reportBody = document.getElementById('report-body');
+            const newRow = document.createElement('tr');
+            newRow.innerHTML = `  
+                <td>${data['employee-name']}</td>
+                <td>${data['department']}</td>
+                <td>${data['work-hours']}</td>
+                <td>${data['overtime']}</td>
+                <td>${data['safety-incident']}</td>
+                <td>${data['labor-law-violation']}</td>
+                <td>${data['audit-date']}</td>
+            `;
+            reportBody.appendChild(newRow);
+            
+            // Show the generated report
+            document.getElementById('compliance-report').style.display = 'block';
+
+            // Optional: Clear the form after submission
+            e.target.reset();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Onboarding Form</title>
+    <!-- FontAwesome CDN for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+
+        header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            position: relative;
+        }
+
+        /* Back Arrow Button */
+        .back-button {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 20px;
+            color: white;
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+        }
+
+        /* Home Icon */
+        .home-button {
+            position: absolute;
+            top: 20px;
+            right: 60px;
+            font-size: 24px;
+            color: white;
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 30px auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            font-size: 2rem;
+            color: #333;
+        }
+
+        label {
+            display: block;
+            margin: 10px 0 5px;
+            font-weight: bold;
+        }
+
+        input[type="text"], input[type="email"], input[type="date"], select, textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0 20px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .cta-button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 4px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            text-align: center;
+            width: 100%;
+        }
+
+        .cta-button:hover {
+            background-color: #45a049;
+        }
+
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <!-- Back Button -->
+        <a href="requirementsandonboarding.html"><button class="back-button" onclick="window.history.back()">←</button></a>
+        
+        <!-- Home Icon -->
+        <a href="FEATURES.HTML"><button class="home-button"><i class="fas fa-home"></i></button></a>
+
+        <h1>New Employee Onboarding Form</h1>
+        <p>Please complete this form to help us get you started on your journey with our company.</p>
+    </header>
+
+    <!-- Onboarding Form -->
+    <div class="container">
+        <form action="/submit-onboarding-form" method="POST">
+
+            <!-- Personal Information -->
+            <div class="form-group">
+                <label for="full-name">Full Name</label>
+                <input type="text" id="full-name" name="full-name" required>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email Address</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+
+            <div class="form-group">
+                <label for="dob">Date of Birth</label>
+                <input type="date" id="dob" name="dob" required>
+            </div>
+
+            <div class="form-group">
+                <label for="address">Home Address</label>
+                <textarea id="address" name="address" rows="3" required></textarea>
+            </div>
+
+            <!-- Employment Details -->
+            <div class="form-group">
+                <label for="start-date">Start Date</label>
+                <input type="date" id="start-date" name="start-date" required>
+            </div>
+
+            <div class="form-group">
+                <label for="position">Position Title</label>
+                <input type="text" id="position" name="position" required>
+            </div>
+
+            <div class="form-group">
+                <label for="department">Department</label>
+                <select id="department" name="department" required>
+                    <option value="hr">Human Resources</option>
+                    <option value="engineering">Engineering</option>
+                    <option value="sales">Sales</option>
+                    <option value="marketing">Marketing</option>
+                    <option value="finance">Finance</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="supervisor">Supervisor/Manager</label>
+                <input type="text" id="supervisor" name="supervisor" required>
+            </div>
+
+            <!-- Emergency Contact -->
+            <div class="form-group">
+                <label for="emergency-contact-name">Emergency Contact Name</label>
+                <input type="text" id="emergency-contact-name" name="emergency-contact-name" required>
+            </div>
+
+            <div class="form-group">
+                <label for="emergency-contact-phone">Emergency Contact Phone</label>
+                <input type="text" id="emergency-contact-phone" name="emergency-contact-phone" required>
+            </div>
+
+            <!-- Document Upload -->
+            <div class="form-group">
+                <label for="id-proof">Upload ID Proof</label>
+                <input type="file" id="id-proof" name="id-proof" accept="image/*, .pdf" required>
+            </div>
+
+            <div class="form-group">
+                <label for="bank-details">Bank Account Details</label>
+                <textarea id="bank-details" name="bank-details" rows="3" required></textarea>
+            </div>
+
+            <!-- Submit Button -->
+            <button type="submit" class="cta-button"><a href="requirementsandonboarding.html" style="text-decoration: none; color:#333;">Submit Form</a></button>
+
+        </form>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 HRM Tool | All Rights Reserved</p>
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Time & Attendance Management - HRM Tool</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #7171c4;
+            color: #333;
+        }
+
+        header {
+            background-color: #c8a6dc;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            position: relative;
+        }
+
+        .back-arrow {
+            position: absolute;
+            left: 10px;
+            top: 10px;
+            font-size: 1.5rem;
+            color: white;
+            cursor: pointer;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 30px auto;
+            padding: 20px;
+        }
+
+        h1 {
+            font-size: 2rem;
+            color: #333;
+        }
+
+        .clock-in-out {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 20px 0;
+            padding: 20px;
+            background-color: rgb(129, 217, 136);
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .clock-in-out button {
+            background-color: #b278d1;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1.2rem;
+        }
+
+        .clock-in-out button:disabled {
+            background-color: #ccc;
+        }
+
+        .work-hours {
+            background-color: rgb(192, 108, 202);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+        }
+
+        .work-hours table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        .work-hours th, .work-hours td {
+            padding: 10px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+
+        .attendance-status {
+            background-color: rgb(215, 134, 210);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+        }
+
+        .attendance-status table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .attendance-status th, .attendance-status td {
+            padding: 10px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+
+        .leave-request {
+            background-color: rgb(223, 136, 214);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+        }
+
+        .leave-request label {
+            font-weight: bold;
+            margin-bottom: 10px;
+            display: inline-block;
+        }
+
+        .leave-request input, .leave-request select, .leave-request textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+        }
+
+        .leave-request button {
+            background-color: #df126b;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .leave-requests-list {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #f4f4f4;
+            border-radius: 8px;
+        }
+
+        .leave-requests-list h3 {
+            margin-bottom: 10px;
+        }
+
+        .leave-requests-list ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .leave-requests-list li {
+            margin-bottom: 10px;
+            padding: 10px;
+            background-color: #ffdfbf;
+            border-radius: 4px;
+        }
+
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 0.5px;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+        .back-button {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 20px;
+            color: white;
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+        }
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="FEATURES.HTML"> <button class="back-button" onclick="window.history.back()">←</button></a>
+        <h1>Time & Attendance Management</h1>
+        <p>Manage employee log-in/out, work hours, and leave requests</p>
+    </header>
+
+    <div class="container">
+        <!-- Clock In / Clock Out Section -->
+        <div class="clock-in-out">
+            <div>
+                <h2>Log In / Log Out</h2>
+                <p id="clockStatus">You are currently Logged out.</p>
+            </div>
+            <div>
+                <button id="clockInBtn">Log In</button>
+                <button id="clockOutBtn" disabled>Log Out</button>
+            </div>
+        </div>
+
+        <!-- Work Hours Section -->
+        <div class="work-hours">
+            <h2>Work Hours</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Clock In</th>
+                        <th>Clock Out</th>
+                        <th>Total Hours</th>
+                    </tr>
+                </thead>
+                <tbody id="workHoursTable"></tbody>
+            </table>
+        </div>
+
+        <!-- Attendance Status Section -->
+        <div class="attendance-status">
+            <h2>Attendance Status</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody id="attendanceTable"></tbody>
+            </table>
+        </div>
+
+        <!-- Leave Request Section -->
+        <div class="leave-request">
+            <h2>Request Leave</h2>
+            <form id="leaveRequestForm">
+                <label for="leaveType">Leave Type:</label>
+                <select id="leaveType" required>
+                    <option value="sick">Select</option>
+                    <option value="vacation">Sick Leave</option>
+                    <option value="personal">Paid Leave</option>
+                    <option value="unpaid">Unpaid Leave</option>
+                </select>
+
+                <label for="leaveReason">Reason:</label>
+                <textarea id="leaveReason" rows="4" required></textarea>
+
+                <label for="leaveStartDate">Leave Start Date:</label>
+                <input type="date" id="leaveStartDate" required>
+
+                <label for="leaveEndDate">Leave End Date:</label>
+                <input type="date" id="leaveEndDate" required>
+
+                <button type="submit">Submit Leave Request</button>
+            </form>
+        </div>
+
+        <!-- Saved Leave Requests -->
+        <div class="leave-requests-list">
+            <h3>Submitted Leave Requests:</h3>
+            <ul id="leaveRequestsList"></ul>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 HRM Tool | All Rights Reserved</p>
+    </footer>
+
+    <script>
+        // Variables for tracking time
+        let clockedIn = false;
+        let workHours = [];
+        let attendance = [];
+        let clockInTime;
+
+        // Button elements
+        const clockInBtn = document.getElementById('clockInBtn');
+        const clockOutBtn = document.getElementById('clockOutBtn');
+        const clockStatus = document.getElementById('clockStatus');
+        const workHoursTable = document.getElementById('workHoursTable');
+        const attendanceTable = document.getElementById('attendanceTable');
+
+        // Event listeners for clock-in and clock-out buttons
+        clockInBtn.addEventListener('click', clockIn);
+        clockOutBtn.addEventListener('click', clockOut);
+
+        function clockIn() {
+            clockedIn = true;
+            clockInTime = new Date();
+            clockStatus.textContent = `You are clocked in at ${clockInTime.toLocaleTimeString()}.`;
+            clockInBtn.disabled = true;
+            clockOutBtn.disabled = false;
+
+            // Mark attendance as present
+            attendance.push({ date: clockInTime.toLocaleDateString(), status: 'Present' });
+            renderAttendance();
+        }
+
+        function clockOut() {
+            const clockOutTime = new Date();
+            clockedIn = false;
+            clockStatus.textContent = `You are clocked out at ${clockOutTime.toLocaleTimeString()}.`;
+
+            // Calculate work duration
+            const duration = calculateWorkHours(clockInTime, clockOutTime);
+
+            // Record the work session (mock data)
+            const workSession = {
+                date: clockInTime.toLocaleDateString(),
+                clockIn: clockInTime.toLocaleTimeString(),
+                clockOut: clockOutTime.toLocaleTimeString(),
+                totalHours: duration
+            };
+
+            workHours.push(workSession);
+            renderWorkHours();
+
+            clockInBtn.disabled = false;
+            clockOutBtn.disabled = true;
+        }
+
+        function calculateWorkHours(clockInTime, clockOutTime) {
+            const diffInMilliseconds = clockOutTime - clockInTime; // Difference in milliseconds
+
+            const totalSeconds = Math.floor(diffInMilliseconds / 1000);
+            const hours = Math.floor(totalSeconds / 3600);
+            const minutes = Math.floor((totalSeconds % 3600) / 60);
+            const seconds = totalSeconds % 60;
+
+            return `${hours} hrs ${minutes} min ${seconds} sec`;
+        }
+
+        function renderWorkHours() {
+            workHoursTable.innerHTML = '';
+            workHours.forEach(session => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${session.date}</td>
+                    <td>${session.clockIn}</td>
+                    <td>${session.clockOut}</td>
+                    <td>${session.totalHours}</td>
+                `;
+                workHoursTable.appendChild(row);
+            });
+        }
+
+        function renderAttendance() {
+            attendanceTable.innerHTML = '';
+            attendance.forEach(entry => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${entry.date}</td>
+                    <td>${entry.status}</td>
+                `;
+                attendanceTable.appendChild(row);
+            });
+        }
+
+        // Leave request form submission
+        const leaveRequestForm = document.getElementById('leaveRequestForm');
+        const leaveRequestsList = document.getElementById('leaveRequestsList');
+
+        leaveRequestForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            // Collect leave request data
+            const leaveType = document.getElementById('leaveType').value;
+            const leaveReason = document.getElementById('leaveReason').value;
+            const leaveStartDate = document.getElementById('leaveStartDate').value;
+            const leaveEndDate = document.getElementById('leaveEndDate').value;
+
+            // Create a list item to display the leave request
+            const leaveRequestItem = document.createElement('li');
+            leaveRequestItem.innerHTML = ` 
+                <strong>${leaveType} Leave</strong><br>
+                Reason: ${leaveReason}<br>
+                Start Date: ${leaveStartDate}<br>
+                End Date: ${leaveEndDate}
+            `;
+
+            // Add the leave request to the list
+            leaveRequestsList.appendChild(leaveRequestItem);
+
+            // Reset the form
+            leaveRequestForm.reset();
+            alert('Leave request submitted successfully.');
+        });
+    </script>
+</body>
+</html>

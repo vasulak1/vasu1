@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Performance Management System</title>
+    <!-- Include Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Include Chart.js Library -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #b89e51;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f2f6f3;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-top: 50px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            margin: 10px 0 5px;
+        }
+
+        input, textarea, select {
+            padding: 10px;
+            margin: 5px 0 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        button {
+            background-color: #0e110e;
+            color: white;
+            padding: 10px;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+            border-radius: 4px;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .performance-review-container {
+            margin-top: 30px;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .kpi-container {
+            margin-top: 30px;
+            padding: 20px;
+            background-color: #e9f7ef;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        .home-btn {
+            position: fixed;
+            bottom: 20px; /* Position 20px from the bottom */
+            right: 20px; /* Position 20px from the right */
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999; /* Ensure it appears on top of other content */
+            text-align: center;
+        }
+
+        .home-btn i {
+            font-size: 20px;
+        }
+
+        .home-btn:hover {
+            background-color: #0056b3;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        hr {
+            margin-top: 20px;
+            border: 1px solid #ddd;
+        }
+
+
+    /* Chart Container */
+    .chart-container {
+        width: 50%; /* Adjust to 100% width */
+        text-align: center; /* Center align the contents */
+        margin-top: 30px;
+    }
+
+    /* Center the canvas elements */
+    .chart-container canvas {
+        display: inline-block; /* Display as inline-block to center */
+        width: auto; /* Auto width for responsiveness */
+        height: auto; /* Auto height for responsiveness */
+        max-width: 100%; /* Ensure canvas doesn't exceed container width */
+    }
+</style>
+</style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Performance Management System</h1>
+
+        <!-- Form for Setting Employee Goals -->
+        <form id="goalForm">
+            <h2>Set Employee Goals</h2>
+            <label for="empGoalName">Employee Name:</label>
+            <input type="text" id="empGoalName" required><br>
+
+            <label for="goalDescription">Goal Description:</label>
+            <textarea id="goalDescription" rows="3" required></textarea><br>
+
+            <label for="goalDeadline">Goal Deadline:</label>
+            <input type="date" id="goalDeadline" required><br>
+
+            <button type="button" onclick="setGoal()">Set Goal</button>
+        </form>
+
+        <!-- Performance Review Form -->
+        <div class="performance-review-container">
+            <h2>Conduct Performance Review</h2>
+            <form id="reviewForm">
+                <label for="empName">Employee Name:</label>
+                <input type="text" id="empName" required><br>
+
+                <label for="performanceScore">Performance Score (1-5):</label>
+                <select id="performanceScore" required>
+                    <option value="">Select Score</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select><br>
+
+                <label for="reviewComments">Review Comments:</label>
+                <textarea id="reviewComments" rows="4" required></textarea><br>
+
+                <button type="button" onclick="submitReview()">Submit Review</button>
+            </form>
+        </div>
+
+        <!-- KPI Tracking Form -->
+        <div class="kpi-container">
+            <h2>Track Key Performance Indicators (KPIs)</h2>
+            <form id="kpiForm">
+                <label for="empKPI">Employee Name:</label>
+                <input type="text" id="empKPI" required><br>
+
+                <label for="kpiMetric">KPI Metric:</label>
+                <input type="text" id="kpiMetric" required><br>
+
+                <label for="kpiValue">KPI Value:</label>
+                <input type="number" id="kpiValue" required><br>
+
+                <button type="button" onclick="submitKPI()">Submit KPI</button>
+            </form>
+        </div>
+
+        <div id="output">
+            <div class="performance-review-container" id="reviewOutput"></div>
+            <div class="kpi-container" id="kpiOutput"></div>
+        </div>
+
+        <!-- Chart Container -->
+      <center><div class="chart-container">
+            <canvas id="performanceChart" width="400" height="200"></canvas>
+            <canvas id="kpiChart" width="500" height="500"></canvas> <!-- Medium Size -->
+        </div></center>
+    </div>
+    <a href="FEATURES.HTML"><button class="home-btn" onclick="goHome()">
+        <i class="fas fa-home"></i>
+    </button></a>
+
+    <script>
+        // Set Employee Goal
+        function setGoal() {
+            const empName = document.getElementById('empGoalName').value;
+            const goalDescription = document.getElementById('goalDescription').value;
+            const goalDeadline = document.getElementById('goalDeadline').value;
+
+            if (!empName || !goalDescription || !goalDeadline) {
+                alert("Please fill all fields.");
+                return;
+            }
+
+            const goalHTML = `
+                <h3>Goal for ${empName}</h3>
+                <p><strong>Goal Description:</strong> ${goalDescription}</p>
+                <p><strong>Deadline:</strong> ${goalDeadline}</p>
+                <hr>
+            `;
+
+            document.getElementById('output').innerHTML = goalHTML;
+        }
+
+        // Submit Performance Review
+        function submitReview() {
+            const empName = document.getElementById('empName').value;
+            const performanceScore = document.getElementById('performanceScore').value;
+            const reviewComments = document.getElementById('reviewComments').value;
+
+            if (!empName || !performanceScore || !reviewComments) {
+                alert("Please fill all fields.");
+                return;
+            }
+
+            const reviewHTML = `
+                <h3>Performance Review for ${empName}</h3>
+                <p><strong>Performance Score:</strong> ${performanceScore}</p>
+                <p><strong>Comments:</strong> ${reviewComments}</p>
+                <hr>
+            `;
+
+            document.getElementById('reviewOutput').innerHTML = reviewHTML;
+
+            // Update Performance Bar Chart
+            updatePerformanceChart(performanceScore);
+        }
+
+        // Submit KPI Tracking
+        function submitKPI() {
+            const empKPI = document.getElementById('empKPI').value;
+            const kpiMetric = document.getElementById('kpiMetric').value;
+            const kpiValue = document.getElementById('kpiValue').value;
+
+            if (!empKPI || !kpiMetric || !kpiValue) {
+                alert("Please fill all fields.");
+                return;
+            }
+
+            const kpiHTML = `
+                <h3>KPI for ${empKPI}</h3>
+                <p><strong>KPI Metric:</strong> ${kpiMetric}</p>
+                <p><strong>KPI Value:</strong> ${kpiValue}</p>
+                <hr>
+            `;
+
+            document.getElementById('kpiOutput').innerHTML = kpiHTML;
+
+            // Update KPI Pie Chart
+            updateKPIChart(kpiValue);
+        }
+
+        // Initialize Bar Chart (Performance Scores)
+        const performanceChartCtx = document.getElementById('performanceChart').getContext('2d');
+        const performanceChart = new Chart(performanceChartCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Employee 1', 'Employee 2', 'Employee 3','Employee 4','Employee 5','Employee 6','Employee 7','Employee 8'],
+                datasets: [{
+                    label: 'Performance Score',
+                    data: [4, 3, 5], // Default data
+                    backgroundColor: ['#4e73df', '#1cc88a', '#36b9cc', '#f6c23e', '#e74a3b'],
+                    borderColor: ['#4e73df', '#1cc88a', '#36b9cc', '#f6c23e', '#e74a3b'],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+        // Initialize Pie Chart (KPI Tracking)
+        const kpiChartCtx = document.getElementById('kpiChart').getContext('2d');
+        const kpiChart = new Chart(kpiChartCtx, {
+            type: 'pie',
+            data: {
+                labels: ['Completed', 'In Progress', 'Not Started'],
+                datasets: [{
+                    data: [30, 50, 20], // Default data
+                    backgroundColor: ['#28a745', '#ffc107', '#dc3545'],
+                    borderColor: '#fff',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true
+            }
+        });
+
+        // Update Performance Chart (Bar Chart)
+        function updatePerformanceChart(score) {
+            performanceChart.data.datasets[0].data.push(score);
+            performanceChart.update();
+        }
+
+        // Update KPI Chart (Pie Chart)
+        function updateKPIChart(value) {
+            const completed = Math.min(value, 100);  // Max value capped at 100
+            const inProgress = Math.max(100 - value, 0);
+            kpiChart.data.datasets[0].data = [completed, inProgress, 100 - completed - inProgress];
+            kpiChart.update();
+        }
+    </script>
+</body>
+</html>

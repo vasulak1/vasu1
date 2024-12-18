@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Requirements and Onboarding</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+
+        header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            position: relative;
+        }
+
+        /* Back Arrow Button */
+        .back-button, .forward-button {
+            position: absolute;
+            top: 20px;
+            font-size: 20px;
+            color: white;
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+        }
+
+        /* Position Back Button on the Left */
+        .back-button {
+            left: 20px;
+        }
+
+        /* Position Forward Button on the Right */
+        .forward-button {
+            right: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px;
+        }
+
+        h1, h2 {
+            color: #333;
+        }
+
+        .section {
+            margin-bottom: 40px;
+        }
+
+        .section h3 {
+            font-size: 1.5rem;
+            color: #4CAF50;
+            margin-bottom: 10px;
+        }
+
+        .section ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .section ul li {
+            font-size: 1rem;
+            margin-bottom: 10px;
+        }
+
+        .cta-button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            font-size: 1rem;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 20px;
+        }
+
+        .cta-button:hover {
+            background-color: #45a049;
+        }
+
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <!-- Back Button -->
+        <a href="FEATURES.HTML"><button class="back-button" onclick="window.history.back()">←</button></a>
+        
+        <!-- Forward Button -->
+        <a href="onboarding.html"><button class="forward-button" onclick="window.location.href='NEXTPAGE.HTML'">→</button></a>
+
+        <h1>Welcome to Our HRM Tool!</h1>
+        <p>Let's get you started with everything you need to know about your role and our onboarding process.</p>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Job Requirements -->
+        <div class="section">
+            <h3>Job Requirements</h3>
+            <ul>
+                <li>Minimum of 3 years of experience in the relevant field</li>
+                <li>Proven track record in project management</li>
+                <li>Strong communication skills (written and verbal)</li>
+                <li>Bachelor's degree in Business Administration or related field</li>
+                <li>Proficiency in Microsoft Office and HR software</li>
+            </ul>
+        </div>
+
+        <!-- Onboarding Steps -->
+        <div class="section">
+            <h3>Onboarding Steps</h3>
+            <ol>
+                <li><strong>Step 1:</strong> Complete your employment paperwork.</li>
+                <li><strong>Step 2:</strong> Set up your company email and communication tools.</li>
+                <li><strong>Step 3:</strong> Meet your team and manager during the welcome meeting.</li>
+                <li><strong>Step 4:</strong> Attend the HR orientation and company policies training.</li>
+                <li><strong>Step 5:</strong> Review your job responsibilities and first-week goals.</li>
+                <li><strong>Step 6:</strong> Complete any role-specific training and assignments.</li>
+            </ol>
+        </div>
+
+        <!-- Documents Section -->
+        <div class="section">
+            <h3>Documents to Provide</h3>
+            <ul>
+                <li>Government-issued ID (for identification purposes)</li>
+                <li>Completed tax forms (W-4 or local equivalent)</li>
+                <li>Bank details for direct deposit setup</li>
+                <li>Any certifications or educational degrees</li>
+                <li>Signed non-disclosure agreements (if applicable)</li>
+            </ul>
+        </div>
+
+        <!-- Training & Orientation -->
+        <div class="section">
+            <h3>Training & Orientation</h3>
+            <p>You'll participate in our comprehensive training program during your first two weeks, which will include:</p>
+            <ul>
+                <li>Introduction to company values, policies, and procedures</li>
+                <li>Role-specific training and system access</li>
+                <li>Workplace safety and compliance training</li>
+                <li>Mentorship program to help you integrate into the team</li>
+            </ul>
+        </div>
+
+        <!-- Welcome Message -->
+        <div class="section">
+            <h3>Welcome to the Team!</h3>
+            <p>We are excited to have you join us! Our team is committed to supporting you every step of the way as you settle into your new role. We look forward to seeing your success and growth here at the company!</p>
+            <a href="#cta" class="cta-button">Start Onboarding</a>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 HRM Tool | All Rights Reserved</p>
+    </footer>
+
+</body>
+</html>
